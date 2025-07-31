@@ -78,7 +78,7 @@ try:
 
     # 書籍情報出力
     book_data = []
-    for book in books:
+    for book in reversed(books):
         title = book.get("title", "No title")
         print(title)
         book_data.append([title])
