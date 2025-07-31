@@ -4,8 +4,6 @@ Amazon Kindle の蔵書データを自動で取得し、CSV形式で保存する
 
 ## 機能
 - Amazon Kindle の蔵書一覧を取得
-- サンプルを除外
-- 購入日（acquiredDate）の降順で並べ替え
 - 書名を `kindle_books.csv` に出力
 - ログイン後のクッキー情報を `.env` に保存・再利用
 
