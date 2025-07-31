@@ -1,6 +1,7 @@
 # kindle_scraper.py
 
 import csv
+import time
 import os
 import json
 from selenium import webdriver
@@ -75,23 +76,16 @@ try:
         books.extend(data.get("itemsList", []))
         pagination_token = data.get("paginationToken")
 
-    # SAMPLEでない書籍のみを抽出し、acquiredDateで降順にソート
-    filtered_books = [
-        book for book in books
-        if book.get("contentType") != "SAMPLE" and book.get("acquiredDate")
-    ]
-    sorted_books = sorted(filtered_books, key=lambda x: x.get("acquiredDate", ""), reverse=True)
-
     # 書籍情報出力
     book_data = []
-    for book in sorted_books:
+    for book in books:
         title = book.get("title", "No title")
         print(title)
         book_data.append([title])
 
-    print(f"蔵書数は{len(sorted_books)}冊です。")
+    print(f"蔵書数は{len(books)}冊です。")
 
-    # 書籍情報をCSVに保存（SAMPLEを除き、acquiredDate降順）
+    # 書籍情報をCSVに保存
     csv_path = os.path.join(os.path.dirname(__file__), "kindle_books.csv")
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
